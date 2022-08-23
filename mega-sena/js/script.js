@@ -1,25 +1,10 @@
 var state = { board: [], currentGame: [], savedGames: [] };
 
 function start() {
-    readLocalStorage();
    createBoard();
    newGame();
-}
 
-function readLocalStorage() {
-    if(!window.localStorage) {
-        return;
-    }
-
-    var savedGamesFromLocalStorange = window.localStorage.getItem('saved-games');
-
-    if (savedGamesFromLocalStorange) {
-        state.savedGames = JSON.parse(savedGamesFromLocalStorange)
-    }
-}
-
-function writeTolocalStorage() {
-    window.localStorage.setItem('saved-games', JSON.stringify(state.savedGames) );
+   console.log(state.board);
 }
 
 function createBoard() {
@@ -33,6 +18,8 @@ function createBoard() {
 function newGame() {
     resetGame();
     render();
+
+    console.log(state.currentGame);
 }
 
 function render() {
@@ -75,6 +62,8 @@ function handleNumberClick(event){
     } else {
         addNumberToGame(value);
     }
+
+    console.log(state.currentGame);
     render();
 }
 
@@ -194,8 +183,9 @@ function saveGame() {
     }
 
     state.savedGames.push(state.currentGame);
-    writeTolocalStorage();
     newGame();
+
+    console.log(state.savedGames);
 }
 
 function isGameComplete() {
@@ -213,6 +203,7 @@ function randomGame() {
         var randomNumber = Math.ceil(Math.random() * 60);
         addNumberToGame(randomNumber);
     }
+    console.log(state.currentGame);
     render();
 }
 
